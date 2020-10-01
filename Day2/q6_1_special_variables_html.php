@@ -38,6 +38,9 @@
 			echo "Triangle is scalene";
 		}
 	}
+	else{
+        echo "You missed some of the above fields."
+    }
 	?>
 
 </html>

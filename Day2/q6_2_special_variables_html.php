@@ -35,7 +35,7 @@
 
     $sum = $s1 + $s2 + $s3 + $s4 + $s5;
     $per = ($sum/500)*100;
-    if($sum){
+    if($name && $s1 && $s2 && $s3 && $s4 && $s5){
         echo "
         <h3>Report</h3>
         <label>Student Name:</labe>$name<br>
@@ -50,7 +50,9 @@
         <label>Percentage: </label>$per%<br>"
         ;
     }
-    
+    else{
+        echo "You missed some of the above fields."
+    }
 ?>
 
 
