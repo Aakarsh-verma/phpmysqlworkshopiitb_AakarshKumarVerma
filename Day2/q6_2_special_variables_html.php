@@ -1,6 +1,6 @@
 <html>
 
-	<form action="ques6-2.php" method='POST'>
+	<form action="q6_2_special_variables_html.php" method='POST'>
     <h3>Enter Your Details</h3>
     <label for="name">Name of Student:</label>
 	<input type='text' name='name' ><br/><br>
@@ -26,16 +26,16 @@
 	</form>
 
 <?php
-    if(isset($_POST['name']) &&  isset($_POST['sub1']) && isset($_POST['sub2']) && isset($_POST['sub3']) && isset($_POST['sub4']) && isset($_POST['sub5'])){
-        $name = $_POST['name'];
-        $s1 =$_POST['sub1'];
-        $s2 =$_POST['sub2'];
-        $s3 =$_POST['sub3'];
-        $s4 =$_POST['sub4'];
-        $s5 =$_POST['sub5'];
+    @$name = $_POST['name'];
+    @$s1 =$_POST['sub1'];
+    @$s2 =$_POST['sub2'];
+    @$s3 =$_POST['sub3'];
+    @$s4 =$_POST['sub4'];
+    @$s5 =$_POST['sub5'];
 
-        $sum = $s1 + $s2 + $s3 + $s4 + $s5;
-        $per = ($sum/500)*100;
+    $sum = $s1 + $s2 + $s3 + $s4 + $s5;
+    $per = ($sum/500)*100;
+    if($sum){
         echo "
         <h3>Report</h3>
         <label>Student Name:</labe>$name<br>
@@ -47,12 +47,10 @@
         <label>Subject 5: </label>$s5<br>
         <label>Total Marks Obtained:</label>$sum<br>
         <label>Total Marks: </label>500<br>
-        <label>Percentage: </label>$per%<br>
-        ";
+        <label>Percentage: </label>$per%<br>"
+        ;
     }
-    else{
-        echo "A field was left empty";
-    }
+    
 ?>
 
 
