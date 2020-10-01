@@ -40,7 +40,6 @@
         <h3>Report</h3>
         <label>Student Name:</labe>$name<br>
         <label>Subject 1: </label>$s1<br>
-        <label>Subject 1: </label>$s1<br>
         <label>Subject 2: </label>$s2<br>
         <label>Subject 3: </label>$s3<br>
         <label>Subject 4: </label>$s4<br>
