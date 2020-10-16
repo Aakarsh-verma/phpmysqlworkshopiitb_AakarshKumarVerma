@@ -1,3 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marksheet</title>
+    <style>td,h1,div{
+    text-align: center;
+    }</style>
+</head>
+<body>
+    <h1>Welcome <?php  echo $_SESSION['user'] ?></h1>
+    
+    <table border="1" cellpadding="15"   style="width: 50%; border-collapse: collapse; margin:0 auto">
+      
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>PHP</th>
+          <th>MYSQL</th>
+          <th>HTML</th>
+          <th>Total Obtained</th>
+          <th>Percentage</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><?php echo $_SESSION['user'] ?></td>
+          <td><?php echo $php ?></td>
+          <td><?php echo $mysql ?></td>
+          <td><?php echo $html ?></td>
+          <td><?php echo $totalobtained ?></td>
+          <td><?php echo $percentage ?></td>
+        </tr>
+      </tbody>
+
+    </table>
+    <h1 ><?php echo $success ?></h1>
+    
+    <div>
+      <form action="sendmail.php" method="POST">
+      
+      <label for="parent_email">Enter Parents Email :</label>
+      <input type="email" name="parent_email"><br>
+      
+      <input type="submit" name="parent_submit">
+      </form>
+    </div>
+    
+    <a style="position:absolute; top:1em ;right:1em;" href="logout.php"><button>Logout</button></a>
+</body>
+</html>
+
 <?php
   require ("connect.php");
   session_start();
@@ -14,13 +68,15 @@
   if (mysqli_num_rows($result) > 0) {
       // output data of each row
       while($row = mysqli_fetch_assoc($result)) {
-        $subject1=$row["php"];
-        $subject2=$row["mysql"];
-        $subject3=$row["html"];
-        $totalobtained=$subject1 + $subject2 + $subject3;
-        $percentage=($totalobtained / 300 )*100;
+        
+        $php        = $row["php"];
+        $mysql      = $row["mysql"];
+        $html       = $row["html"];
+        $totalmarks = $row['totalmarks'];
+        $percent    = $row['percent'];
       }    
-      if($percentage>=60){
+      
+      if($percent>=60){
         $success="Congratulations You Passed!";
       }  
       else $success="Better Luck Next Time!"; 
@@ -28,48 +84,3 @@
   // else echo "Error";
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>td,h1,div{
-    text-align: center;
-    }</style>
-</head>
-<body>
-    <h1>Welcome <?php  echo $_SESSION['user'] ?></h1>
-    <table border="2" cellpadding="15"   style="width: 50%; border-collapse: collapse; margin:0 auto">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>PHP</th>
-          <th>MYSQL</th>
-          <th>HTML</th>
-          <th>Total Obtained</th>
-          <th>Percentage</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><?php echo $_SESSION['user'] ?></td>
-          <td><?php echo $subject1 ?></td>
-          <td><?php echo $subject2 ?></td>
-          <td><?php echo $subject3 ?></td>
-          <td><?php echo $totalobtained ?></td>
-          <td><?php echo $percentage ?></td>
-        </tr>
-      </tbody>
-    </table>
-    <h1 ><?php echo $success ?></h1>
-    <div>
-      <form action="sendmail.php" method="POST">
-      Enter Parents Email: <input type="email" name="parent_email">
-      <input type="submit" name="parent_submit">
-      </form>
-    </div>
-    <a style="position:absolute; top:1em ;right:1em;" href="logout.php"><button>Logout</button></a>
-</body>
-</html>
